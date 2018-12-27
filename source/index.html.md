@@ -11,6 +11,7 @@ includes:
   - intro
   - user_token
   - police_registration
+  - ocr_ios
   - errors
 
 search: true

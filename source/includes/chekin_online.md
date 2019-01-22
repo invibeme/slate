@@ -69,7 +69,7 @@ check_in_date | true | The arrival date in format YYYY-MM-DD, i.e. 2018-12-30.
 nights_of_stay | true | The number of nights of the stay as an integer, i.e. 3.
 generate_receipt | false | False by default. If set to false, the registration receipt won't be generated.
 accommodation_nif | false | NIF number of the legal holder of the accommodation, to be used in the receipt if generate_receipt is true.
-accommondation_name | true | The property name, to be used in the receipt if generate_receipt is true.
+accommondation_name | false | The property name, to be used in the receipt if generate_receipt is true.
 accommodation_province | false | The name of the city where the accommodation is placed, to be used in the receipt if generate_receipt is true.
 accommodation_city | false | The name of the city where the accommodation is placed, to be used in the receipt if generate_receipt is true.
 include_ocr | true | Indicates whether the OCR Service is included or not.

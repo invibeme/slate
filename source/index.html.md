@@ -13,6 +13,7 @@ includes:
   - police_registration
   - ocr_web
   - biomatch
+  - chekin_online
   - errors
 
 search: true

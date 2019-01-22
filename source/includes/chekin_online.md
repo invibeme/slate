@@ -10,7 +10,7 @@ curl -X POST \
   -H 'Authorization: Token yourUserTokenHere' \
   -H 'Content-Type: application/json' \
   -d '{
-        "guest_phone": "+34685434324",
+        "guest_phone": "34685434324",
         "guest_email": "carlos33@gmail.com",
         "police_type": "POL",
         "police_user": "H41811AAXQU",
@@ -36,7 +36,7 @@ curl -X POST \
 
 ```json
   {
-    "id": 2,
+    "id": 1,
     "guest_phone": "34685434324",
     "guest_email": "carlos33@gmail.com",
     "accommondation_name": "MY HOUSE",
@@ -118,10 +118,9 @@ Value | Description
 ## Get Results of Checkin Online
 
 
-
 ```shell
 curl -X GET \
-  https://api.chekin.io/api/v1/tools/chekin_online/reservations/34658435456/ \
+  https://api.chekin.io/api/v1/tools/chekin_online/reservations/34685434324/ \
   -H 'Authorization: Token yourUserTokenHere' \
   -H 'Content-Type: application/json' \
 ```
@@ -140,3 +139,24 @@ curl -X GET \
   }
 
 ```
+
+This endpoint allows you to retrieve checkin Online information.
+
+### HTTP Request
+
+`GET https://api.chekin.io/api/v1/tools/chekin_online/reservations/<PHONE_NUMBER>/`
+
+### URL Parameters
+
+Parameter | Required | Description
+--------- | -------- | -----------
+PHONE_NUMBER | true | Guest phone number.
+
+
+### Reservations status
+
+Value | Description
+----- | -----------
+BKD   | Booked.
+STG   | Sent to Guest.
+COM   | Completed.

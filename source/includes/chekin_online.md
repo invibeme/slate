@@ -1,7 +1,7 @@
 # Chekin Online
 
 
-## Create Checkin Online
+## Create Check-in Online
 
 
 ```shell
@@ -65,6 +65,10 @@ guest_email | false | Email of the guest to register.
 police_type | true | Police type and police credentials are required to send the guests data to the police. Police type depends of the country. See police types by country below. You can see the polices types below.
 police_user | true | The username used to do login in the police website.
 police_password | true | The password used to do login in the police website.
+police_cert_password | false | Used for Italy Only. The password of the certificate which is usually the same as the user password.
+establishment_num | false | Used for Portugal Only. It's an extra numer provided by the police to do login.
+is_housing_group | false | Used only if police type is POL. Set it to true only if the accommodation is registered at the police as part of a Group.
+police_hostelry_code | false | Used only if is_housing_group is true. Hostelry code given by the police to this accommodation.
 check_in_date | true | The arrival date in format YYYY-MM-DD, i.e. 2018-12-30.
 nights_of_stay | true | The number of nights of the stay as an integer, i.e. 3.
 generate_receipt | false | False by default. If set to false, the registration receipt won't be generated.
@@ -113,3 +117,58 @@ Police type will set which is the final police organization to which you want to
 Value | Description
 ----- | -----------
 "ISP" | Data is sent to "Polizia di Stato".
+
+
+
+## Get list of receipts from Check-in Online
+
+
+```shell
+curl -X GET \
+  https://api.chekin.io/api/v1/tools/chekin_online/1/police_receipts/ \
+  -H 'Authorization: Token yourUserTokenHere' \
+  -H 'Content-Type: application/json'
+```
+
+> The above command returns JSON structured like this:
+
+```json
+  [
+    {
+        "name": "Julian",
+        "first_surname": "Gómez",
+        "second_surname": "Espejo",
+        "doc_number": "08938074K",
+        "receipt_url": "https://api.chekin.io/lnk/2dxhp"
+    },
+    {
+        "name": "Mario",
+        "first_surname": "Fernández",
+        "second_surname": "Lagares",
+        "doc_number": "65004204V",
+        "receipt_url": "https://api.chekin.io/lnk/ghpzy"
+    },
+    {
+        "name": "Jose",
+        "first_surname": "Perez",
+        "second_surname": "González",
+        "doc_number": "49311680W",
+        "receipt_url": "https://api.chekin.io/lnk/25t52"
+    }
+  ]
+```
+
+This endpoint allows you to obtain all the receipts of a specific online checkin.
+
+The `receipt_url` field is a link to a pdf file whose content is a receipt
+
+
+### HTTP Request
+
+`GET https://test3.chekin.io/api/v1/tools/chekin_online/<ID>/police_receipts/`
+
+### URL Parameters
+
+Parameter | Required | Description
+--------- | -------- | -----------
+ID | true | ID that refers to a specific Check-in Online.

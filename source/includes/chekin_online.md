@@ -165,7 +165,7 @@ The `receipt_url` field is a link to a pdf file whose content is a receipt
 
 ### HTTP Request
 
-`GET https://test3.chekin.io/api/v1/tools/chekin_online/<ID>/police_receipts/`
+`GET https://api.chekin.io/api/v1/tools/chekin_online/<ID>/police_receipts/`
 
 ### URL Parameters
 

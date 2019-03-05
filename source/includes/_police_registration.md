@@ -40,7 +40,7 @@ curl -X POST \
 
 ```json
   {
-      "id": 1524,
+      "id": "64672caf4d2140e19d68b222fa0da318",
       "created": "2018-12-01T03:42:21.659258Z",
       "status": "NEW",
       "status_display": "Nuevo",
@@ -398,7 +398,7 @@ nights_of_stay | true | The number of nights of the stay as an integer, i.e. 3
 
 ```shell
 curl -X GET \
-  https://api.chekin.io/api/v1/tools/police/register/1524/ \
+  https://api.chekin.io/api/v1/tools/police/register/64672caf4d2140e19d68b222fa0da318/ \
   -H 'Authorization: Token yourUserTokenHere' \
   -H 'Content-Type: application/json'
 ```
@@ -408,7 +408,7 @@ curl -X GET \
 
 ```json
     {
-        "id": 1524,
+        "id": "64672caf4d2140e19d68b222fa0da318",
         "created": "2018-11-30T14:51:36.026016Z",
         "status": "COM",
         "status_display": "Verificación policial completada con éxito.",

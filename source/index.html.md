@@ -12,11 +12,9 @@ includes:
   - user_token
   - police_registration
   - ocr_ios
+  - ocr_web
+  - biomatch
   - errors
 
 search: true
 ---
-
-
-
-

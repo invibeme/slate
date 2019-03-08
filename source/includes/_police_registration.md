@@ -6,7 +6,7 @@
 
 ```shell
 curl -X POST \
-  https://api.chekin.io/api/v1/tools/police/register/ \
+  https://api.chekin.io/api/v1.1/tools/police/register/ \
   -H 'Authorization: Token yourUserTokenHere' \
   -H 'Content-Type: application/json' \
   -d '{
@@ -87,7 +87,7 @@ It is not necessary to inform about that type of changes.
 
 ### HTTP Request
 
-`POST https://api.chekin.io/api/v1/tools/police/register/`
+`POST https://api.chekin.io/api/v1.1/tools/police/register/`
 
 ### Query Parameters
 
@@ -283,7 +283,7 @@ This field is only required for italians being registered in Italian State Polic
  
 You can get the full list of cities and IDs doing the following request:
 
-`GET https://api.chekin.io/api/v1/tools/police/italy/cities/`
+`GET https://api.chekin.io/api/v1.1/tools/police/italy/cities/`
 
 The response will be a JSON list of cities with a name and a code. The code must be used in the api.
 
@@ -293,7 +293,7 @@ Remember — you need to send the authentication headers with User Token!
 
 ```shell
 curl -X GET \
-  https://api.chekin.io/api/v1/tools/police/italy/cities/ \
+  https://api.chekin.io/api/v1.1/tools/police/italy/cities/ \
   -H 'Authorization: Token yourUserTokenHere' \
   -H 'Content-Type: application/json'
 ```

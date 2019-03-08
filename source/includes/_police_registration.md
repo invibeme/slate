@@ -327,7 +327,7 @@ curl -X GET \
 
 ```shell
 curl -X POST \
-  https://api.chekin.io/api/v1/tools/police/register/ \
+  https://api.chekin.io/api/v1.1/tools/police/register/ \
   -H 'Authorization: Token yourUserTokenHere' \
   -H 'Content-Type: application/json' \
   -d '{
@@ -397,7 +397,7 @@ nights_of_stay | true | The number of nights of the stay as an integer, i.e. 3
 
 ```shell
 curl -X GET \
-  https://api.chekin.io/api/v1/tools/police/register/64672caf4d2140e19d68b222fa0da318/ \
+  https://api.chekin.io/api/v1.1/tools/police/register/64672caf4d2140e19d68b222fa0da318/ \
   -H 'Authorization: Token yourUserTokenHere' \
   -H 'Content-Type: application/json'
 ```
@@ -443,7 +443,7 @@ The receipts will be deleted in 3 days, unless you have hired the documentation 
 
 ### HTTP Request
 
-`GET https://api.chekin.io/api/v1/tools/police/register/<ID>/`
+`GET https://api.chekin.io/api/v1.1/tools/police/register/<ID>/`
 
 ### URL Parameters
 

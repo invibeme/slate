@@ -331,16 +331,6 @@ curl -X POST \
   -H 'Authorization: Token yourUserTokenHere' \
   -H 'Content-Type: application/json' \
   -d '{
-    "group_members": [{
-        "name": "MARIANO",
-        "surname": "MARTINEZ",
-        "nationality": "ESP",
-        "sex": "M",
-        "birth_date": "1987-07-20",
-        "nights_of_stay": 1,
-        "birth_place": "ESP"
-    }],
-    "police_hostelry_code": "1|AFFITTO PURO DI LUCIA ROMA, PIAZZA DI SAN PANTALEO 3, PIANO TERZO INTERNO 6 [ROMA] (1)",
     "test_mode": false,
     "police_type": "ISP",
     "police_user": "somePoliceUser",
@@ -357,7 +347,16 @@ curl -X POST \
     "nationality": "ESP",
     "birth_date": "1981-11-12",
     "generate_receipt": false,
-    "guest_type": "GROUP"
+    "guest_type": "GROUP",
+    "group_members": [{
+        "name": "MARIANO",
+        "surname": "MARTINEZ",
+        "nationality": "ESP",
+        "sex": "M",
+        "birth_date": "1987-07-20",
+        "nights_of_stay": 1,
+        "birth_place": "ESP"
+    }]
 }'
 ```
 

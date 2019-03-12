@@ -12,7 +12,7 @@ You can use our API to access the following services:
 
 - MRZ / OCR Scanner
 
-- Identity Verification Service
+- Biometric Match Service
 
 - Check-in Online
 
@@ -23,6 +23,8 @@ We support cross-origin resource sharing, allowing you to interact securely with
 CheKin API accepts data as JSON or also as multipart/form-data. JSON is returned by all API responses, including errors.
 
 The base url for CheKin Tools API endpoints is `https://api.chekin.io/api/v1/`
+
+For the police api the last version is v1.1, then the base url is `https://api.chekin.io/api/v1.1/`
 
 # Security
 All the API runs over HTTPS, so data transmission in encrypted. Also, the guests data and signature are stored encrypted into our database.

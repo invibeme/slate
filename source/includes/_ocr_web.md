@@ -19,7 +19,7 @@ curl -X POST \
 
 ```json
   {
-    "id": 15,
+    "id": "64672caf4d2140e19d68b222fa0da318",
     "picture_file": "https://s3.eu-west-2.amazonaws.com/chekinapptest/uploads/pictures/1fa97ecc020911e9a283d64b2af3b94e.jpg?X-Amz-Expires=3600&X-Amz-Credential=AKIAJMSXFFSPIIN6XG4Q%2F20181217%2Feu-west-2%2Fs3%2Faws4_request&X-Amz-Date=20181217T143622Z&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-SignedHeaders=host&X-Amz-Signature=3a60e7e16d71b93c567616d52946909f6cf7400a63a930789d8d3668f4e117cb",
     "mrz_detected": false,
     "status": "NEW",
@@ -58,7 +58,7 @@ picture_file | true | Image of the document to scan.
 
 ```shell
 curl -X GET \
-  https://api.chekin.io/api/v1/tools/ocr/data/458/ \
+  https://api.chekin.io/api/v1/tools/ocr/data/64672caf4d2140e19d68b222fa0da318/ \
   -H 'Authorization: Token yourUserTokenHere' \
   -H 'Content-Type: application/json'
 ```
@@ -68,7 +68,7 @@ curl -X GET \
 
 ```json
   {
-    "id": 458,
+    "id": "64672caf4d2140e19d68b222fa0da318",
     "picture_file": "https://s3.eu-west-2.amazonaws.com/chekinmrzweb/uploads/pictures/3be5c68efe0f11e89b7c0242ac110003.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJMSXFFSPIIN6XG4Q%2F20190103%2Feu-west-2%2Fs3%2Faws4_request&X-Amz-Date=20190103T005930Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=9f813e7c917554491a9eb3808488267c4d6f126a2fae58c8bddbedbb2c2366f5",
     "mrz_detected": true,
     "status": "COM",
@@ -110,7 +110,8 @@ valid_expiration_date | Expiration date checksum validity.
 valid_number | Personal number validity score calculated.
 valid_score | The MRZ trust score calculated. Is calculated based on valid_* fields.
 
-The valid_score field tells us how good the result of the data extraction has been. It has a range [0 - 100], obtaining better results the greater the value of the field.
+The valid_score field tells us how good the result of the data extraction has been. It has a range [0 - 100], 
+obtaining better results the greater the value of the field.
 
 
 ### HTTP Request

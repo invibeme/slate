@@ -6,7 +6,7 @@
 
 ```shell
 curl -X POST \
-  https://api.chekin.io/api/v1/tools/police/register/ \
+  https://api.chekin.io/api/v1.1/tools/police/register/ \
   -H 'Authorization: Token yourUserTokenHere' \
   -H 'Content-Type: application/json' \
   -d '{
@@ -40,7 +40,7 @@ curl -X POST \
 
 ```json
   {
-      "id": 1524,
+      "id": "64672caf4d2140e19d68b222fa0da318",
       "created": "2018-12-01T03:42:21.659258Z",
       "status": "NEW",
       "status_display": "Nuevo",
@@ -72,6 +72,8 @@ curl -X POST \
 
 This endpoint sends the guests data to the police.
 
+If you want to register a group of persons (family or just a few people with single document) please check out the following section: **Register a group of people**.
+
 We currently support Spain, Italy and Portugal polices. More countries coming soon!
 
 Optionally, the registration receipt can be generated.
@@ -85,13 +87,13 @@ It is not necessary to inform about that type of changes.
 
 ### HTTP Request
 
-`POST https://api.chekin.io/api/v1/tools/police/register/`
+`POST https://api.chekin.io/api/v1.1/tools/police/register/`
 
 ### Query Parameters
 
 Parameter | Required | Description
 --------- | -------- | -----------
-test_mode | false | false by default. If it's set to true, then the data isn't sent to the police, but you will get the same answer as in a successful registration.
+test_mode | false | `false` by default. If it's set to `true`, then the data isn't sent to the police, but you will get the same answer as in a successful registration.
 police_type | false | Police type and police credentials are required to send the guests data to the police. Police type depends of the country. See police types by country below.
 police_user | false | The username used to do login in the police website.
 police_password | false | The password used to do login in the police website.
@@ -118,6 +120,7 @@ accommodation_name | false | The property name, to be used in the receipt if gen
 accommodation_province | false | The name of teh province where the accommodation is placed, to be used in the receipt if generate_receipt is true.
 accommodation_city | false | The name of the city where the accommodation is placed, to be used in the receipt if generate_receipt is true.
 receipt_signature | false | The guest signature, base64 encoded, to be used in the receipt if generate_receipt is true.
+guest_type | false | Type of guest, can be a `SINGLE` (default value) or a group of people. Check the section **Register a group of guests** for details.
 
 ### Test Mode
 There is a test mode that can be activated setting the attribute test_mode in true. In this mode you can send any police username and any police password, no real login will be attempted and data won't be sen't to the police. You can use it to test the api or to test your integrations.
@@ -280,7 +283,7 @@ This field is only required for italians being registered in Italian State Polic
  
 You can get the full list of cities and IDs doing the following request:
 
-`GET https://api.chekin.io/api/v1/tools/police/italy/cities/`
+`GET https://api.chekin.io/api/v1.1/tools/police/italy/cities/`
 
 The response will be a JSON list of cities with a name and a code. The code must be used in the api.
 
@@ -290,7 +293,7 @@ Remember — you need to send the authentication headers with User Token!
 
 ```shell
 curl -X GET \
-  https://api.chekin.io/api/v1/tools/police/italy/cities/ \
+  https://api.chekin.io/api/v1.1/tools/police/italy/cities/ \
   -H 'Authorization: Token yourUserTokenHere' \
   -H 'Content-Type: application/json'
 ```
@@ -320,13 +323,81 @@ curl -X GET \
     ]
 ```
 
+## Register a group of people
+
+```shell
+curl -X POST \
+  https://api.chekin.io/api/v1.1/tools/police/register/ \
+  -H 'Authorization: Token yourUserTokenHere' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "test_mode": false,
+    "police_type": "ISP",
+    "police_user": "somePoliceUser",
+    "police_cert_password": "someCertPassword",
+    "police_password": "somePolicePassword",
+    "check_in_date": "2019-03-04",
+    "nights_of_stay": 1,
+    "name": "CARLOS ALBERTO",
+    "first_surname": "LAGARES GALLARDO",
+    "doc_type": "IDELE",
+    "doc_number": "75560632C",
+    "doc_issue_date": "2014-02-14",
+    "sex": "M",
+    "nationality": "ESP",
+    "birth_date": "1981-11-12",
+    "generate_receipt": false,
+    "guest_type": "GROUP",
+    "group_members": [{
+        "name": "MARIANO",
+        "surname": "MARTINEZ",
+        "nationality": "ESP",
+        "sex": "M",
+        "birth_date": "1987-07-20",
+        "nights_of_stay": 1,
+        "birth_place": "ESP"
+    }]
+}'
+```
+
+
+<aside class="warning">
+Warning: Groups currently supported only for Italian State Police
+</aside>
+
+If you want to register a group of persons (family or just a few people with a single document) 
+you have to set the `guest_type` field in the request body and fill in the `group_memebers` field.
+
+The rest of payload is equal to the registration of a single person, as described in previous section.
+The person in the root of the request body will be used as a group leader and should contain information that is 
+necessary to verify that person, such as document type, number, etc. See the previous section for details.
+
+For the `guest_type` you can use one of the following values:
+
+Value | Description
+--------- | -------- 
+FAMILY | Family, group of relatives (matches to "17", "Capo Famiglia" in Italian State Police)
+GROUP | Generic group, e.g. friends (matches to "18", "Capo Gruppo" in Italian State Police)
+
+The `group_members` has the following structure:
+
+
+Parameter | Required | Description
+--------- | -------- | -----------
+name | true | The guest's name/s.
+surname | true | The guest's surname
+nationality | true | Country code in ISO 3-letters format, i.e. ESP (Spain) / DEU (Germany) / ITA (Italy)
+sex | true | "F" (Female) / "M" (Male) 
+birth_date | true | The guest's birth date in format `YYYY-MM-DD`, i.e. 1982-10-15
+birth_place | false | Used for Italians in Italy Only. It must be the CODE of one of the Italian cities (see previous section).
+nights_of_stay | true | The number of nights of the stay as an integer, i.e. 3
 
 
 ## Get Registration status & Receipt
 
 ```shell
 curl -X GET \
-  https://api.chekin.io/api/v1/tools/police/register/1524/ \
+  https://api.chekin.io/api/v1.1/tools/police/register/64672caf4d2140e19d68b222fa0da318/ \
   -H 'Authorization: Token yourUserTokenHere' \
   -H 'Content-Type: application/json'
 ```
@@ -336,7 +407,7 @@ curl -X GET \
 
 ```json
     {
-        "id": 1524,
+        "id": "64672caf4d2140e19d68b222fa0da318",
         "created": "2018-11-30T14:51:36.026016Z",
         "status": "COM",
         "status_display": "Verificación policial completada con éxito.",
@@ -372,7 +443,7 @@ The receipts will be deleted in 3 days, unless you have hired the documentation 
 
 ### HTTP Request
 
-`GET https://api.chekin.io/api/v1/tools/police/register/<ID>/`
+`GET https://api.chekin.io/api/v1.1/tools/police/register/<ID>/`
 
 ### URL Parameters
 

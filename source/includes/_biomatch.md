@@ -1,4 +1,4 @@
-# Biometric Matching
+# Biometric Match Service
 
 
 ## Extract face on ID image
@@ -19,7 +19,7 @@ curl -X POST \
 
 ```json
   {
-    "id": 2,
+    "id": "64672caf4d2140e19d68b222fa0da318",
     "picture_file": "https://s3.eu-west-2.amazonaws.com/chekinapptest/uploads/identifications/f028266e150211e9a283d64b2af3b94e.jpg?X-Amz-Date=20190110T180957Z&X-Amz-SignedHeaders=host&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJMSXFFSPIIN6XG4Q%2F20190110%2Feu-west-2%2Fs3%2Faws4_request&X-Amz-Expires=3600&X-Amz-Signature=c176e805360ad8bf073931b53214df73ca81333f2d3fc289f6ae3807b51b0ab0",
     "status": "NEW",
     "is_face_detected": false
@@ -44,7 +44,7 @@ picture_file | true | Image of the document to extract the face.
 
 ```shell
 curl -X GET \
-  https://api.chekin.io/api/v1/tools/biomatch/identification/2/ \
+  https://api.chekin.io/api/v1/tools/biomatch/identification/64672caf4d2140e19d68b222fa0da318/ \
   -H 'Authorization: Token yourUserTokenHere' \
   -H 'Content-Type: application/json'
 ```
@@ -54,7 +54,7 @@ curl -X GET \
 
 ```json
   {
-    "id": 2,
+    "id": "64672caf4d2140e19d68b222fa0da318",
     "picture_file": "https://s3.eu-west-2.amazonaws.com/chekinapptest/uploads/identifications/f028266e150211e9a283d64b2af3b94e.jpg?X-Amz-Date=20190110T180957Z&X-Amz-SignedHeaders=host&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJMSXFFSPIIN6XG4Q%2F20190110%2Feu-west-2%2Fs3%2Faws4_request&X-Amz-Expires=3600&X-Amz-Signature=c176e805360ad8bf073931b53214df73ca81333f2d3fc289f6ae3807b51b0ab0",
     "status": "COM",
     "is_face_detected": true
@@ -105,7 +105,7 @@ curl -X POST \
 
 ```json
   {
-    "id": 2,
+    "id": "64672caf4d2140e19d68b222fa0da318",
     "picture_file": "https://s3.eu-west-2.amazonaws.com/chekinapptest/uploads/identifications/f028266e150211e9a283d64b2af3b94e.jpg?X-Amz-Date=20190110T180957Z&X-Amz-SignedHeaders=host&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJMSXFFSPIIN6XG4Q%2F20190110%2Feu-west-2%2Fs3%2Faws4_request&X-Amz-Expires=3600&X-Amz-Signature=c176e805360ad8bf073931b53214df73ca81333f2d3fc289f6ae3807b51b0ab0",
     "status": "NEW",
     "is_face_detected": false
@@ -130,7 +130,7 @@ picture_file | true | Image of the selfie to extract the face.
 
 ```shell
 curl -X GET \
-  https://api.chekin.io/api/v1/tools/biomatch/identification/2/ \
+  https://api.chekin.io/api/v1/tools/biomatch/identification/64672caf4d2140e19d68b222fa0da318/ \
   -H 'Authorization: Token yourUserTokenHere' \
   -H 'Content-Type: application/json'
 ```
@@ -140,7 +140,7 @@ curl -X GET \
 
 ```json
   {
-    "id": 2,
+    "id": "64672caf4d2140e19d68b222fa0da318",
     "picture_file": "https://s3.eu-west-2.amazonaws.com/chekinapptest/uploads/identifications/f028266e150211e9a283d64b2af3b94e.jpg?X-Amz-Date=20190110T180957Z&X-Amz-SignedHeaders=host&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJMSXFFSPIIN6XG4Q%2F20190110%2Feu-west-2%2Fs3%2Faws4_request&X-Amz-Expires=3600&X-Amz-Signature=c176e805360ad8bf073931b53214df73ca81333f2d3fc289f6ae3807b51b0ab0",
     "status": "COM",
     "is_face_detected": true
@@ -192,7 +192,7 @@ curl -X POST \
 
 ```json
   {
-    "id": 2,
+    "id": "64672caf4d2140e19d68b222fa0da318",
     "identification_picture": 2,
     "person_picture": 2,
     "status": "NEW",
@@ -220,7 +220,7 @@ person_picture | true | identifier of the extraction process of the face in the 
 
 ```shell
 curl -X GET \
-  https://api.chekin.io/api/v1/tools/biomatch/compare/2/ \
+  https://api.chekin.io/api/v1/tools/biomatch/compare/64672caf4d2140e19d68b222fa0da318/ \
   -H 'Authorization: Token yourUserTokenHere' \
   -H 'Content-Type: application/json'
 ```
@@ -230,7 +230,7 @@ curl -X GET \
 
 ```json
   {
-    "id": 2,
+    "id": "64672caf4d2140e19d68b222fa0da318",
     "identification_picture": 2,
     "person_picture": 2,
     "status": "COM",

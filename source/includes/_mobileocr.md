@@ -9,7 +9,7 @@ This scanner optimize OCR results by first performing of preprocessing filters f
 
 Your can easily try our OCR Scanner through the test app named "Chekin ID". Currently only available for iOS devices, in Apple Store.
 
-[*Link to app*]
+
 ## How to add ScannerChekin to your project
 
 **Adding iOS SDK - ScannerChekinIOS**

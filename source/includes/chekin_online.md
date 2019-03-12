@@ -1,9 +1,9 @@
-# Check-in Online
+# Check-in Online API
 
 Check-in Online allows the guest to register himself in the police, by using a user-friendly WebApp. 
 
 It's a simple solution to register guests in the police, when you don't want to develop your own UX or if you don't want to deal with Guests data.
- 
+
 
 ## Create Checkin Online
 
@@ -59,7 +59,7 @@ Optionally you can add and/or combine extra features with the Check-in Online:
  - If you use electronic locks of one of our supported brands, you can use Chekin Key App to give the guest direct access to the room using Bluetooth, after verifying his identity. 
  
 
-Support for RFID locks comming soon.
+Support for RFID locks and Remote locks (web opening) coming soon.
 
 
 ### HTTP Request
@@ -95,38 +95,12 @@ Value | Description
 ----- | -----------
 BLE   | The locks are opened via bluetooth.
 RFID  | The locks are opened via RFID card.
-
-
-### Police types in Spain
-Police type will set which is the final police organization to which you want to send the data. Remember that there are 4 police forces in Spain:
-
-Value | Description
------ | -----------
-"POL" | Data is sent to "Policía Nacional".
-"NAT" | Data is sent to "Guardia Civil".
-"ERT" | Data is sent to "Ertzaintza".
-"MOS" | Data is sent to "Mossos d'Esquadra".
-
-
-### Police types in Portugal
-Police type will set which is the final police organization to which you want to send the data. There is a single police organization in Portugal for this matters:
-
-Value | Description
------ | -----------
-"SEF" | Data is sent to "Serviço de Estrangeiros e Fronteiras".
-
-
-### Police types in Italy
-Police type will set which is the final police organization to which you want to send the data. There is a single police organization in Italy:
-
-Value | Description
------ | -----------
-"ISP" | Data is sent to "Polizia di Stato".
+REMOTE| The locks are opened from a web link (Beta)
 
 
 ## Set Lock BLE Key
 
-If you want to use Chekin Key and Smart Locks to allow the guests to open the door you need to provide the Bluetooth binary key.
+If you want to use Chekin Key App to allow the guests to open the door you need to provide the Bluetooth binary key.
 
 ```shell
 curl -X POST \

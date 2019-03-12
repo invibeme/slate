@@ -12,7 +12,7 @@ You can use our API to access the following services:
 
 - MRZ / OCR Scanner
 
-- Identity Verification Service
+- Biometric Match Service
 
 - Check-in Online
 

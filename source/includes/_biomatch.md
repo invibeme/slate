@@ -1,4 +1,4 @@
-# Biometric Matching
+# Biometric Match Service
 
 
 ## Extract face on ID image

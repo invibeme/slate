@@ -11,6 +11,7 @@ includes:
   - intro
   - user_token
   - police_registration
+  - tax_calculation
   - ocr_web
   - mobileocr
   - biomatch

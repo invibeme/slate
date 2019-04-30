@@ -5,7 +5,7 @@
 
 ```shell
 curl -X POST \
-  https://api.chekin.io/api/v1/tools/ocr/picture/ \
+  https://api.chekin.io/api/v2/tools/ocr/picture/ \
   -H 'Authorization: Token yourUserTokenHere' \
   -H 'Content-Type: multipart/form-data' \
   -d '{
@@ -42,23 +42,36 @@ curl -X POST \
 
 This endpoint allows you to upload the image of the document to be processed.
 
+###The types of files supported are the following:
+
+File Type |
+----------|
+PNG |
+JPEG or JPG |
+PDF |
+TIFF or TIF |
+BMP |
+
 
 ### HTTP Request
 
-`POST https://api.chekin.io/api/v1/tools/ocr/picture/`
+`POST https://api.chekin.io/api/v2/tools/ocr/picture/`
 
 ### Query Parameters
 
 Parameter | Required | Description
 --------- | -------- | -----------
-picture_file | true | Image of the document to scan.
+picture_file | true | Image of the document to scan, **base64 encoded**
 
+<aside class="notice">
+The format used to send the image is base64
+</aside>
 
 ## Get Scan status & Data
 
 ```shell
 curl -X GET \
-  https://api.chekin.io/api/v1/tools/ocr/data/64672caf4d2140e19d68b222fa0da318/ \
+  https://api.chekin.io/api/v2/tools/ocr/data/64672caf4d2140e19d68b222fa0da318/ \
   -H 'Authorization: Token yourUserTokenHere' \
   -H 'Content-Type: application/json'
 ```
@@ -74,12 +87,12 @@ curl -X GET \
     "status": "COM",
     "type_doc": "P",
     "country": "ESP",
-    "date_of_birth": "400515",
-    "expiration_date": "160803",
+    "date_of_birth": "1975-05-15",
+    "expiration_date": "2022-08-03",
     "names": "MARTIN",
     "surname": "SANCHEZ",
     "nationality": "ESP",
-    "number": "09953192H",
+    "number": "59953192N",
     "sex": "M",
     "valid_composite": true,
     "valid_date_of_birth": true,
@@ -110,16 +123,54 @@ valid_expiration_date | Expiration date checksum validity.
 valid_number | Personal number validity score calculated.
 valid_score | The MRZ trust score calculated. Is calculated based on valid_* fields.
 
-The valid_score field tells us how good the result of the data extraction has been. It has a range [0 - 100], 
+The **valid_score** field tells us how good the result of the data extraction has been. It has a range [0 - 100], 
 obtaining better results the greater the value of the field.
 
+###The different values that the type_doc field can have are the following:
+
+Value | Description
+--------- | -----------
+P | Passports
+ID | National ID Cards
+IX | Redisence permission ID Cards (A foreign person living in spain for example)
+
+### Dates
+The format of the date fields like **date_of_birth** or **expiration_date** is: **YYYY-MM-DD**
 
 ### HTTP Request
 
-`GET https://api.chekin.io/api/v1/tools/ocr/data/<ID>/`
+`GET https://api.chekin.io/api/v2/tools/ocr/data/<ID>/`
 
 ### URL Parameters
 
 Parameter | Required | Description
 --------- | -------- | -----------
 ID | true | ID that refers to a specific image processing.
+
+
+##Image quality requirements
+
+Below are the details about the expected external image quality and size for successful document image processing using our OCR API:
+
+* The document should be completely inside the image, not touching the edges.
+* The background should be contrast to the document (i.e. not white on white, or black on black, otherwise we cannot detect the document).
+* Preferably, the document should take 70-80% of the image area (this is important, as even if the image corresponds to 12 MP, but after detection and cropping the document is only 640x480 - it will not be processed correctly).
+* JPEG compression should be not less than 70% of the original.
+* Tilt angle should be not higher than 10 degrees in any direction (horizontal or vertical), otherwise distortion will be too high to be corrected without damage to the image quality.
+
+If you have, let’s say, an 800x600 image from a web camera and you have a document on the image, chances are high that document will take no more than 80% of the area. If this web camera is a standard one from the laptop, for example, then most probably it has fixed focus (no autofocus) and the document will not be in focus at this distance from the camera. In this case you couldn't expect high probability of successful OCR results.
+
+If the document we are talking about is an ID card, then its size is 86x54 mm. Let’s do the math. 800 pixels * 0.8(80%) / 86 mm *25.4(mm per inch) = 189 PPI. This is really below the limits for correct OCR, as the font used, for example, in German ID cards is only 2 mm in height, so it will be 15 pixels only maximum, including JPEG compression artifacts and background noise, and all this will lead to poor OCR probability and mistakes.
+
+To get successful results, this document image at minimum should be 300 PPI / 25.4 = ~12 pixels per mm (ppm)  -> 86 mm * 12 ppm = 1032 pixels for document width -> 1032 / 0,8 (80%) = 1290 pixels for image width, where the document is flat on the surface without tilt to the camera.
+
+If we talk about documents like passport, then calculations should be done accordingly to its larger size of 125x88 mm.
+
+However, passports have MRZ with lower resolution constraints for successful OCR. If you present a passport occupying 80% of the 800x600 image, then its MRZ will be recognized with good probability in 90+% of cases if all other requirements on the image quality are met.
+
+To conclude all that, images from a Full HD resolution (1920x1080) camera with autofocus are recommended to get proven good quality OCR results for any identity document size.
+
+## Supported Documents
+
+We can recognize all MRZ formats standardized by ICAO.
+[ICAO List](https://www.icao.int/publications/Documents/9303_p3_cons_en.pdf)

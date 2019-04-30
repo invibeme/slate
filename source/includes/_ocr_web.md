@@ -134,7 +134,8 @@ P | Passports
 ID | National ID Cards
 IX | Redisence permission ID Cards (A foreign person living in spain for example)
 
-**The format of the fields related to the date is: YYYY-MM-DD**
+### Dates
+The format of the date fields like **date_of_birth** or **expiration_date** is: **YYYY-MM-DD**
 
 ### HTTP Request
 

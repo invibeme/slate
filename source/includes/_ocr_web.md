@@ -61,7 +61,7 @@ BMP |
 
 Parameter | Required | Description
 --------- | -------- | -----------
-picture_file | true | Image of the document to scan. 
+picture_file | true | Image of the document to scan. Image of the document to scan, **base64 encoded**
 
 <aside class="notice">
 The format used to send the image is base64
@@ -123,7 +123,7 @@ valid_expiration_date | Expiration date checksum validity.
 valid_number | Personal number validity score calculated.
 valid_score | The MRZ trust score calculated. Is calculated based on valid_* fields.
 
-The valid_score field tells us how good the result of the data extraction has been. It has a range [0 - 100], 
+The **valid_score** field tells us how good the result of the data extraction has been. It has a range [0 - 100], 
 obtaining better results the greater the value of the field.
 
 ###The different values that the type_doc field can have are the following:
@@ -149,8 +149,7 @@ ID | true | ID that refers to a specific image processing.
 
 ##Image quality requirements
 
-Below are the details about the expected external image quality and size for successful document image processing using our API:
-
+Below are the details about the expected external image quality and size for successful document image processing using our OCR API:
 
 * The document should be completely inside the image, not touching the edges.
 * The background should be contrast to the document (i.e. not white on white, or black on black, otherwise we cannot detect the document).
@@ -169,3 +168,8 @@ If we talk about documents like passport, then calculations should be done accor
 However, passports have MRZ with lower resolution constraints for successful OCR. If you present a passport occupying 80% of the 800x600 image, then its MRZ will be recognized with good probability in 90+% of cases if all other requirements on the image quality are met.
 
 To conclude all that, images from a Full HD resolution (1920x1080) camera with autofocus are recommended to get proven good quality OCR results for any identity document size.
+
+## Supported Documents
+
+We can recognize all MRZ formats standardized by ICAO.
+[ICAO List](https://www.icao.int/publications/Documents/9303_p3_cons_en.pdf)

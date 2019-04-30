@@ -61,7 +61,7 @@ BMP |
 
 Parameter | Required | Description
 --------- | -------- | -----------
-picture_file | true | Image of the document to scan. Image of the document to scan, **base64 encoded**
+picture_file | true | Image of the document to scan, **base64 encoded**
 
 <aside class="notice">
 The format used to send the image is base64

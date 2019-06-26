@@ -400,6 +400,8 @@ sex | true | "F" (Female) / "M" (Male)
 birth_date | true | The guest's birth date in format `YYYY-MM-DD`, i.e. 1982-10-15
 birth_place | false | Used for Italians in Italy Only. It must be the CODE of one of the Italian cities (see previous section).
 nights_of_stay | true | The number of nights of the stay as an integer, i.e. 3
+residence_country | false | Country code in ISO 3-letters format, i.e. ESP (Spain) / DEU (Germany) / ITA (Italy). It is required for Emila-Romagna/Abruzzo/Lombardia ISTATs.  
+residence_city | false | Used if residence_country is Italy. It must be the CODE of one of the Italian cities (see previous section).
 
 
 ## Get Registration status & Receipt

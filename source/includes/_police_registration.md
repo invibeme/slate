@@ -85,7 +85,7 @@ It also has no problem with changes related to the stay, for example if the numb
 It is not necessary to inform about that type of changes.
 
 If istat credentials are specified the app will send aggregated statistics once a day.
-Currently we support ISTAT for italian Radar, Campania, Emilia-Romagna, Abruzzo and Lombardia.
+Currently we support ISTAT for italian Radar, Campania, Emilia-Romagna, Abruzzo, Lombardia and Piemonte.
 
 ### HTTP Request
 
@@ -127,7 +127,7 @@ accommodation_province | false | The name of teh province where the accommodatio
 accommodation_city | false | The name of the city where the accommodation is placed, to be used in the receipt if generate_receipt is true.
 receipt_signature | false | The guest signature, base64 encoded, to be used in the receipt if generate_receipt is true.
 guest_type | false | Type of guest, can be a `SINGLE` (default value) or a group of people. Check the section **Register a group of guests** for details.
-istat_type | false | Istat account type, could be `ITRA` (Italy Radar), `ITCA` (Italy Campania), `ITER` (Emilia-Romagna), `ITAB` (Abruzzo) or `ITLO` (Lombardia) for now
+istat_type | false | Istat account type, could be `ITRA` (Italy Radar), `ITCA` (Italy Campania), `ITER` (Emilia-Romagna), `ITAB` (Abruzzo), `ITLO` (Lombardia) or `ITPI` (Piemonte) for now
 istat_username | false | Username for istat account
 istat_password | false | Password for istat account
 istat_structure_code | false | Code of structure for istat account. It needed if you have more than one structure in your Emila-Romagna/Abruzzo/Lombardia istat account.

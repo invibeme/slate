@@ -80,8 +80,8 @@ Optionally, the registration receipt can be generated.
 The police registration runs asynchronously, then on this first call the registration will be triggered and you will get a status "NEW".
 You will need to do a second call later to check the status until it is "COM" (completion time can be 5-10 seconds).
 
-The police don't allow modifying the guests data once they have been registered successfully. 
-It also has no problem with changes related to the stay, for example if the number of nights of stay is extended later. 
+The police don't allow modifying the guests data once they have been registered successfully.
+It also has no problem with changes related to the stay, for example if the number of nights of stay is extended later.
 It is not necessary to inform about that type of changes.
 
 If istat credentials are specified the app will send aggregated statistics once a day.
@@ -107,7 +107,7 @@ check_in_date | true | The arrival date in format YYYY-MM-DD, i.e. 2018-12-30
 nights_of_stay | true | The number of nights of the stay as an integer, i.e. 3
 doc_type | true | Doc types depends on the country. See Doc Types Table below.  
 doc_number | true | An alpha-numeric string shown in the identification document.
-sex | true | "F" (Female) / "M" (Male) 
+sex | true | "F" (Female) / "M" (Male)
 name | true | The guest's name/s.
 first_surname | true | The guest's first surname
 second_surname | false | The guest's seconds surname. Only required for spanish people.
@@ -159,8 +159,8 @@ Value | Description
 "ISP" | Data is sent to "Polizia di Stato".
 
 ### Accommodation Group Police Users
-The parameter is housing group is optional and it's only used for the police type POL, "Policía Nacional". 
-In some cases, when the user has a lot of properties, this police gives to the property owners a user of type "Group User". 
+The parameter is housing group is optional and it's only used for the police type POL, "Policía Nacional".
+In some cases, when the user has a lot of properties, this police gives to the property owners a user of type "Group User".
 That means that the user has several accommodations inside the same police account. In that case, you will need to send this parameter "is housing group" in true and you will need to provide also an extra "property subcode" in the parameter police_hostelry_code. That subcode, that identifies the property inside the police account, should be asked to the property owner, and it's shown on the police website.
 
 ### Doc types in Spain
@@ -172,7 +172,7 @@ Value | Description
 "I" | European ID card.
 "X" | Foreign residence permission.
 "P" | Passport.
- 
+
 
 ### Doc types in Portugal
 Value | Description
@@ -285,7 +285,7 @@ Value | Description
 
 ### Italian cities
 This field is only required for italians being registered in Italian State Police.
- 
+
 You can get the full list of cities and IDs doing the following request:
 
 `GET https://api.chekin.io/api/v1.1/tools/police/italy/cities/`
@@ -369,17 +369,17 @@ curl -X POST \
 Warning: Groups currently supported only for Italian State Police
 </aside>
 
-If you want to register a group of persons (family or just a few people with a single document) 
+If you want to register a group of persons (family or just a few people with a single document)
 you have to set the `guest_type` field in the request body and fill in the `group_memebers` field.
 
 The rest of payload is equal to the registration of a single person, as described in previous section.
-The person in the root of the request body will be used as a group leader and should contain information that is 
+The person in the root of the request body will be used as a group leader and should contain information that is
 necessary to verify that person, such as document type, number, etc. See the previous section for details.
 
 For the `guest_type` you can use one of the following values:
 
 Value | Description
---------- | -------- 
+--------- | --------
 FAMILY | Family, group of relatives (matches to "17", "Capo Famiglia" in Italian State Police)
 GROUP | Generic group, e.g. friends (matches to "18", "Capo Gruppo" in Italian State Police)
 
@@ -391,10 +391,43 @@ Parameter | Required | Description
 name | true | The guest's name/s.
 surname | true | The guest's surname
 nationality | true | Country code in ISO 3-letters format, i.e. ESP (Spain) / DEU (Germany) / ITA (Italy)
-sex | true | "F" (Female) / "M" (Male) 
+sex | true | "F" (Female) / "M" (Male)
 birth_date | true | The guest's birth date in format `YYYY-MM-DD`, i.e. 1982-10-15
 birth_place | false | Used for Italians in Italy Only. It must be the CODE of one of the Italian cities (see previous section).
 nights_of_stay | true | The number of nights of the stay as an integer, i.e. 3
+
+
+
+## Retrigger Register Person
+
+```shell
+curl -X POST \
+  https://api.chekin.io/api/v1/checkins/persons/retrigger \
+  -H 'Authorization: Token yourUserTokenHere' \
+  -H 'Content-Type: application/json' \
+  -d '{
+        "ids": [
+          1189
+        ]
+      }'
+```
+
+
+> The above command returns JSON structured like this:
+
+```json
+    {
+      "ids": [
+        1189
+      ]
+    }
+```
+
+This endpoint allows retrigger the failed records to the police.
+
+Parameter | Required | Description
+--------- | -------- | -----------
+ids | true | List of id (must be interger type) of the person checkin.
 
 
 ## Get Registration status & Receipt
@@ -463,5 +496,3 @@ You will be able to see a full list of registers, check their status, download r
 You can access with the user and password used in Sign Up.
 
 [https://tools.chekin.io/login](https://tools.chekin.io/login)
-
-

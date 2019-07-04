@@ -85,7 +85,7 @@ It also has no problem with changes related to the stay, for example if the numb
 It is not necessary to inform about that type of changes.
 
 If istat credentials are specified the app will send aggregated statistics once a day.
-Currently we support ISTAT for italian Radar, Campania, Emilia-Romagna, Abruzzo and Lombardia.
+Currently we support ISTAT for italian Radar, Campania, Emilia-Romagna, Abruzzo, Venetto and Lombardia.
 
 ### HTTP Request
 
@@ -127,7 +127,7 @@ accommodation_province | false | The name of teh province where the accommodatio
 accommodation_city | false | The name of the city where the accommodation is placed, to be used in the receipt if generate_receipt is true.
 receipt_signature | false | The guest signature, base64 encoded, to be used in the receipt if generate_receipt is true.
 guest_type | false | Type of guest, can be a `SINGLE` (default value) or a group of people. Check the section **Register a group of guests** for details.
-istat_type | false | Istat account type, could be `ITRA` (Italy Radar), `ITCA` (Italy Campania), `ITER` (Emilia-Romagna), `ITAB` (Abruzzo) or `ITLO` (Lombardia) for now
+istat_type | false | Istat account type, could be `ITRA` (Italy Radar), `ITCA` (Italy Campania), `ITER` (Emilia-Romagna), `ITAB` (Abruzzo), `ITVE` (Veneto) or `ITLO` (Lombardia) for now.
 istat_username | false | Username for istat account
 istat_password | false | Password for istat account
 istat_structure_code | false | Code of structure for istat account. It needed if you have more than one structure in your Emila-Romagna/Abruzzo/Lombardia istat account.
@@ -439,7 +439,7 @@ ids | true | List of id (must be interger type) of the person checkin.
 
 ```shell
 curl -X GET \
-  https://api.chekin.io/api/v1.1/tools/police/register/64672caf4d2140e19d68b222fa0da318/ \
+  https://api.chekin.io/api/v1.1/tools/police/register/798ee3d0235a4ac7bb0bf5867f1bbb78/ \
   -H 'Authorization: Token yourUserTokenHere' \
   -H 'Content-Type: application/json'
 ```
@@ -449,39 +449,60 @@ curl -X GET \
 
 ```json
     {
-        "id": "64672caf4d2140e19d68b222fa0da318",
-        "created": "2018-11-30T14:51:36.026016Z",
+        "id": "798ee3d0235a4ac7bb0bf5867f1bbb78",
+        "created": "2019-07-04T19:21:25.606112Z",
         "status": "COM",
-        "status_display": "Verificación policial completada con éxito.",
+        "status_display": "Police verification successfully completed",
         "status_details": "",
-        "police_type": "POL",
-        "police_user": "H41811AAXQU",
-        "guest_type": null,
-        "name": "MARIANO",
-        "first_surname": "MARTINEZ",
-        "second_surname": "GRASSO",
+        "status_istat": "COM",
+        "status_istat_display": "ISTAT verification successfully completed",
+        "status_istat_details": "",
+        "police_type": "ISP",
+        "police_user": "test",
+        "police_password": "test",
+        "police_cert_password": "test",
+        "establishment_num": "",
+        "guest_type": "SINGLE",
+        "name": "ERIC FERNANDO",
+        "first_surname": "SANCHEZ",
+        "second_surname": "GALVEZ",
         "sex": "M",
         "nationality": "ESP",
-        "birth_date": "1987-07-20",
+        "residence_country": null,
+        "residence_city": null,
+        "birth_date": "1982-11-21",
         "birth_place": null,
-        "doc_type": "D",
-        "doc_number": "25698412S",
-        "doc_issue_date": "2012-12-14",
+        "doc_issue_country": null,
         "doc_isue_place": null,
-        "check_in_date": "2019-02-22",
-        "nights_of_stay": 2,
+        "doc_type": "D",
+        "doc_number": "48912467T",
+        "doc_issue_date": "2016-02-03",
+        "is_housing_group": false,
+        "police_hostelry_code": "",
+        "check_in_date": "2019-07-03",
+        "nights_of_stay": 1,
+        "rooms_occupied": null,
         "generate_receipt": true,
         "accommodation_nif": "77552368S",
         "accommodation_name": "Carlos Homes",
-        "accommodation_province": "Sevilla",
-        "accommodation_city": "Huelva",
-        "receipt_url": "https://api.chekin.io/lnk/zad3y"
+        "accommodation_province": "Rome",
+        "accommodation_city": "Rome",
+        "receipt_url": "https://test3.chekin.io/lnk/g5mse",
+        "test_mode": true,
+        "is_delayed_execution": false,
+        "execution_datetime": null,
+        "group_members": [],
+        "is_identity_verified": false,
+        "istat_type": "ITRA",
+        "istat_username": "test",
+        "istat_password": "test",
+        "istat_structure_code": null,
+        "police_country": "ITA"
     }
 ```
 
-This endpoint returns the registration details, including the status and a link to download the receipt (if the registration was triggered with parameter generate_receipt = true).
+This endpoint returns the registration details, including the police registration status and ISTAT registration status. Also, if parameter generate_receipt = true, then a link to download the receipt will be included.
 
-The receipts will be deleted in 3 days, unless you have hired the documentation management service.
 
 ### HTTP Request
 

@@ -130,7 +130,7 @@ guest_type | false | Type of guest, can be a `SINGLE` (default value) or a group
 istat_type | false | Istat account type, could be `ITRA` (Italy Radar), `ITCA` (Italy Campania), `ITER` (Emilia-Romagna), `ITAB` (Abruzzo), `ITVE` (Veneto) or `ITLO` (Lombardia) for now.
 istat_username | false | Username for istat account
 istat_password | false | Password for istat account
-istat_structure_code | false | Code of structure for istat account. It needed if you have more than one structure in your Emila-Romagna/Abruzzo/Lombardia istat account.
+istat_structure_code | false | Code of structure (property) for istat account. It needed if you have more than one structure in your Emila-Romagna/Abruzzo/Lombardia/Veneto istat account.
 
 ### Test Mode
 There is a test mode that can be activated setting the attribute test_mode in true. In this mode you can send any police username and any police password, no real login will be attempted and data won't be sen't to the police. You can use it to test the api or to test your integrations.

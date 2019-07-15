@@ -149,7 +149,7 @@ ID | true | ID that refers to a specific image processing.
 
 ## MRZ + Face Extraction
 
-> Example 1 -> When the photo of face is in the first image:
+> Example 1 -> When the photo of face is in the same place than MRZ code:
 
 ```shell
 curl -X POST \
@@ -197,7 +197,7 @@ curl -X POST \
 ```
 
 
-> Example 2 -> When the photo of face is in the second image:
+> Example 2 -> When the photo of face is not in the same place than MRZ code:
 
 ```shell
 curl -X POST \

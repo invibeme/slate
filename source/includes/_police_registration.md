@@ -80,12 +80,12 @@ Optionally, the registration receipt can be generated.
 The police registration runs asynchronously, then on this first call the registration will be triggered and you will get a status "NEW".
 You will need to do a second call later to check the status until it is "COM" (completion time can be 5-10 seconds).
 
-The police don't allow modifying the guests data once they have been registered successfully. 
-It also has no problem with changes related to the stay, for example if the number of nights of stay is extended later. 
+The police don't allow modifying the guests data once they have been registered successfully.
+It also has no problem with changes related to the stay, for example if the number of nights of stay is extended later.
 It is not necessary to inform about that type of changes.
 
 If istat credentials are specified the app will send aggregated statistics once a day.
-Currently we support ISTAT for italian Radar, Campania, Emilia-Romagna, Abruzzo, Lombardia and Piemonte.
+Currently we support ISTAT for italian Radar, Campania, Emilia-Romagna, Abruzzo, Lombardia, Piemonte and Veneto.
 
 ### HTTP Request
 
@@ -107,7 +107,7 @@ check_in_date | true | The arrival date in format YYYY-MM-DD, i.e. 2018-12-30
 nights_of_stay | true | The number of nights of the stay as an integer, i.e. 3
 doc_type | true | Doc types depends on the country. See Doc Types Table below.  
 doc_number | true | An alpha-numeric string shown in the identification document.
-sex | true | "F" (Female) / "M" (Male) 
+sex | true | "F" (Female) / "M" (Male)
 name | true | The guest's name/s.
 first_surname | true | The guest's first surname
 second_surname | false | The guest's seconds surname. Only required for spanish people.
@@ -127,10 +127,10 @@ accommodation_province | false | The name of teh province where the accommodatio
 accommodation_city | false | The name of the city where the accommodation is placed, to be used in the receipt if generate_receipt is true.
 receipt_signature | false | The guest signature, base64 encoded, to be used in the receipt if generate_receipt is true.
 guest_type | false | Type of guest, can be a `SINGLE` (default value) or a group of people. Check the section **Register a group of guests** for details.
-istat_type | false | Istat account type, could be `ITRA` (Italy Radar), `ITCA` (Italy Campania), `ITER` (Emilia-Romagna), `ITAB` (Abruzzo), `ITLO` (Lombardia) or `ITPI` (Piemonte) for now
+istat_type | false | Istat account type, could be `ITRA` (Italy Radar), `ITCA` (Italy Campania), `ITER` (Emilia-Romagna), `ITAB` (Abruzzo), `ITLO` (Lombardia), `ITPI` (Piemonte) and `ITVE` (Veneto) for now
 istat_username | false | Username for istat account
 istat_password | false | Password for istat account
-istat_structure_code | false | Code of structure for istat account. It needed if you have more than one structure in your Emila-Romagna/Abruzzo/Lombardia istat account.
+istat_structure_code | false | Code of structure (property) for istat account. It needed if you have more than one structure in your Emila-Romagna/Abruzzo/Lombardia/Veneto istat account.
 
 ### Test Mode
 There is a test mode that can be activated setting the attribute test_mode in true. In this mode you can send any police username and any police password, no real login will be attempted and data won't be sen't to the police. You can use it to test the api or to test your integrations.
@@ -164,8 +164,8 @@ Value | Description
 "ISP" | Data is sent to "Polizia di Stato".
 
 ### Accommodation Group Police Users
-The parameter is housing group is optional and it's only used for the police type POL, "Policía Nacional". 
-In some cases, when the user has a lot of properties, this police gives to the property owners a user of type "Group User". 
+The parameter is housing group is optional and it's only used for the police type POL, "Policía Nacional".
+In some cases, when the user has a lot of properties, this police gives to the property owners a user of type "Group User".
 That means that the user has several accommodations inside the same police account. In that case, you will need to send this parameter "is housing group" in true and you will need to provide also an extra "property subcode" in the parameter police_hostelry_code. That subcode, that identifies the property inside the police account, should be asked to the property owner, and it's shown on the police website.
 
 ### Doc types in Spain
@@ -177,7 +177,7 @@ Value | Description
 "I" | European ID card.
 "X" | Foreign residence permission.
 "P" | Passport.
- 
+
 
 ### Doc types in Portugal
 Value | Description
@@ -290,7 +290,7 @@ Value | Description
 
 ### Italian cities
 This field is only required for italians being registered in Italian State Police.
- 
+
 You can get the full list of cities and IDs doing the following request:
 
 `GET https://api.chekin.io/api/v1.1/tools/police/italy/cities/`
@@ -374,17 +374,17 @@ curl -X POST \
 Warning: Groups currently supported only for Italian State Police
 </aside>
 
-If you want to register a group of persons (family or just a few people with a single document) 
+If you want to register a group of persons (family or just a few people with a single document)
 you have to set the `guest_type` field in the request body and fill in the `group_memebers` field.
 
 The rest of payload is equal to the registration of a single person, as described in previous section.
-The person in the root of the request body will be used as a group leader and should contain information that is 
+The person in the root of the request body will be used as a group leader and should contain information that is
 necessary to verify that person, such as document type, number, etc. See the previous section for details.
 
 For the `guest_type` you can use one of the following values:
 
 Value | Description
---------- | -------- 
+--------- | --------
 FAMILY | Family, group of relatives (matches to "17", "Capo Famiglia" in Italian State Police)
 GROUP | Generic group, e.g. friends (matches to "18", "Capo Gruppo" in Italian State Police)
 
@@ -396,7 +396,7 @@ Parameter | Required | Description
 name | true | The guest's name/s.
 surname | true | The guest's surname
 nationality | true | Country code in ISO 3-letters format, i.e. ESP (Spain) / DEU (Germany) / ITA (Italy)
-sex | true | "F" (Female) / "M" (Male) 
+sex | true | "F" (Female) / "M" (Male)
 birth_date | true | The guest's birth date in format `YYYY-MM-DD`, i.e. 1982-10-15
 birth_place | false | Used for Italians in Italy Only. It must be the CODE of one of the Italian cities (see previous section).
 nights_of_stay | true | The number of nights of the stay as an integer, i.e. 3
@@ -404,11 +404,44 @@ residence_country | false | Country code in ISO 3-letters format, i.e. ESP (Spai
 residence_city | false | Used if residence_country is Italy. It must be the CODE of one of the Italian cities (see previous section).
 
 
+
+## Retrigger Register Person
+
+```shell
+curl -X POST \
+  https://api.chekin.io/api/v1/checkins/persons/retrigger \
+  -H 'Authorization: Token yourUserTokenHere' \
+  -H 'Content-Type: application/json' \
+  -d '{
+        "ids": [
+          1189
+        ]
+      }'
+```
+
+
+> The above command returns JSON structured like this:
+
+```json
+    {
+      "ids": [
+        1189
+      ]
+    }
+```
+
+This endpoint allows retrigger the failed records to the police.
+
+Parameter | Required | Description
+--------- | -------- | -----------
+ids | true | List of id (must be interger type) of the person checkin.
+
+
 ## Get Registration status & Receipt
 
 ```shell
 curl -X GET \
-  https://api.chekin.io/api/v1.1/tools/police/register/64672caf4d2140e19d68b222fa0da318/ \
+  https://api.chekin.io/api/v1.1/tools/police/register/798ee3d0235a4ac7bb0bf5867f1bbb78/ \
   -H 'Authorization: Token yourUserTokenHere' \
   -H 'Content-Type: application/json'
 ```
@@ -418,39 +451,60 @@ curl -X GET \
 
 ```json
     {
-        "id": "64672caf4d2140e19d68b222fa0da318",
-        "created": "2018-11-30T14:51:36.026016Z",
+        "id": "798ee3d0235a4ac7bb0bf5867f1bbb78",
+        "created": "2019-07-04T19:21:25.606112Z",
         "status": "COM",
-        "status_display": "Verificación policial completada con éxito.",
+        "status_display": "Police verification successfully completed",
         "status_details": "",
-        "police_type": "POL",
-        "police_user": "H41811AAXQU",
-        "guest_type": null,
-        "name": "MARIANO",
-        "first_surname": "MARTINEZ",
-        "second_surname": "GRASSO",
+        "status_istat": "COM",
+        "status_istat_display": "ISTAT verification successfully completed",
+        "status_istat_details": "",
+        "police_type": "ISP",
+        "police_user": "test",
+        "police_password": "test",
+        "police_cert_password": "test",
+        "establishment_num": "",
+        "guest_type": "SINGLE",
+        "name": "ERIC FERNANDO",
+        "first_surname": "SANCHEZ",
+        "second_surname": "GALVEZ",
         "sex": "M",
         "nationality": "ESP",
-        "birth_date": "1987-07-20",
+        "residence_country": null,
+        "residence_city": null,
+        "birth_date": "1982-11-21",
         "birth_place": null,
-        "doc_type": "D",
-        "doc_number": "25698412S",
-        "doc_issue_date": "2012-12-14",
+        "doc_issue_country": null,
         "doc_isue_place": null,
-        "check_in_date": "2019-02-22",
-        "nights_of_stay": 2,
+        "doc_type": "D",
+        "doc_number": "48912467T",
+        "doc_issue_date": "2016-02-03",
+        "is_housing_group": false,
+        "police_hostelry_code": "",
+        "check_in_date": "2019-07-03",
+        "nights_of_stay": 1,
+        "rooms_occupied": null,
         "generate_receipt": true,
         "accommodation_nif": "77552368S",
         "accommodation_name": "Carlos Homes",
-        "accommodation_province": "Sevilla",
-        "accommodation_city": "Huelva",
-        "receipt_url": "https://api.chekin.io/lnk/zad3y"
+        "accommodation_province": "Rome",
+        "accommodation_city": "Rome",
+        "receipt_url": "https://test3.chekin.io/lnk/g5mse",
+        "test_mode": true,
+        "is_delayed_execution": false,
+        "execution_datetime": null,
+        "group_members": [],
+        "is_identity_verified": false,
+        "istat_type": "ITRA",
+        "istat_username": "test",
+        "istat_password": "test",
+        "istat_structure_code": null,
+        "police_country": "ITA"
     }
 ```
 
-This endpoint returns the registration details, including the status and a link to download the receipt (if the registration was triggered with parameter generate_receipt = true).
+This endpoint returns the registration details, including the police registration status and ISTAT registration status. Also, if parameter generate_receipt = true, then a link to download the receipt will be included.
 
-The receipts will be deleted in 3 days, unless you have hired the documentation management service.
 
 ### HTTP Request
 
@@ -470,5 +524,3 @@ You will be able to see a full list of registers, check their status, download r
 You can access with the user and password used in Sign Up.
 
 [https://tools.chekin.io/login](https://tools.chekin.io/login)
-
-

@@ -85,7 +85,7 @@ It also has no problem with changes related to the stay, for example if the numb
 It is not necessary to inform about that type of changes.
 
 If istat credentials are specified the app will send aggregated statistics once a day.
-Currently we support ISTAT for italian Radar, Campania, Emilia-Romagna, Abruzzo, Venetto and Lombardia.
+Currently we support ISTAT for italian Radar, Campania, Emilia-Romagna, Abruzzo, Lombardia, Piemonte and Veneto.
 
 ### HTTP Request
 
@@ -127,7 +127,7 @@ accommodation_province | false | The name of teh province where the accommodatio
 accommodation_city | false | The name of the city where the accommodation is placed, to be used in the receipt if generate_receipt is true.
 receipt_signature | false | The guest signature, base64 encoded, to be used in the receipt if generate_receipt is true.
 guest_type | false | Type of guest, can be a `SINGLE` (default value) or a group of people. Check the section **Register a group of guests** for details.
-istat_type | false | Istat account type, could be `ITRA` (Italy Radar), `ITCA` (Italy Campania), `ITER` (Emilia-Romagna), `ITAB` (Abruzzo), `ITVE` (Veneto) or `ITLO` (Lombardia) for now.
+istat_type | false | Istat account type, could be `ITRA` (Italy Radar), `ITCA` (Italy Campania), `ITER` (Emilia-Romagna), `ITAB` (Abruzzo), `ITLO` (Lombardia), `ITPI` (Piemonte) and `ITVE` (Veneto) for now
 istat_username | false | Username for istat account
 istat_password | false | Password for istat account
 istat_structure_code | false | Code of structure (property) for istat account. It needed if you have more than one structure in your Emila-Romagna/Abruzzo/Lombardia/Veneto istat account.
@@ -400,6 +400,8 @@ sex | true | "F" (Female) / "M" (Male)
 birth_date | true | The guest's birth date in format `YYYY-MM-DD`, i.e. 1982-10-15
 birth_place | false | Used for Italians in Italy Only. It must be the CODE of one of the Italian cities (see previous section).
 nights_of_stay | true | The number of nights of the stay as an integer, i.e. 3
+residence_country | false | Country code in ISO 3-letters format, i.e. ESP (Spain) / DEU (Germany) / ITA (Italy). It is required for Emila-Romagna/Abruzzo/Lombardia ISTATs.  
+residence_city | false | Used if residence_country is Italy. It must be the CODE of one of the Italian cities (see previous section).
 
 
 

@@ -95,7 +95,7 @@ Currently we support ISTAT for italian Radar, Campania, Emilia-Romagna, Abruzzo,
 
 Parameter | Required | Description
 --------- | -------- | -----------
-test_mode | false | `false` by default. If it's set to `true`, then the data isn't sent to the police, but you will get the same answer as in a successful registration.
+test_mode | false | `false` by default. If it's set to `true`, then the data isn't sent to the police or istat, but you will get the same answer as in a successful registration.
 police_type | false | Police type and police credentials are required to send the guests data to the police. Police type depends of the country. See police types by country below.
 police_user | false | The username used to do login in the police website.
 police_password | false | The password used to do login in the police website.
@@ -134,9 +134,19 @@ istat_structure_code | false | Code of structure (property) for istat account. I
 istat_sardegna_city_code | false | Code of city for Sardegna istat account (see below). This field is reguired for `ITSA` (Sardegna) istat_type.
 
 ### Test Mode
-There is a test mode that can be activated setting the attribute test_mode in true. In this mode you can send any police username and any police password, no real login will be attempted and data won't be sen't to the police. You can use it to test the api or to test your integrations.
+There is a test mode that can be activated setting the attribute test_mode in `true`.
 
-To make a real registration you will need to get the property owner user and password that they use to login into the police website.  
+In this mode you can send any police (or ISTAT) username and any password, 
+no real login will be attempted and data won't be send to the police (or ISTAT). 
+You can use it to test the API or to test your integrations.
+
+In the case of ISTAT no real requests will be made, and 
+the task will be marked as successfully completed. 
+If you have configured the webhooks, 
+they will be triggered as if the task was successfully completed too. 
+
+To make a real registration you will need to get the property owner user and 
+password that they use to login into the police website.  
 
 ### Police types in Spain
 Police type will set which is the final police organization to which you want to send the data. Remember that there are 4 police forces in Spain:

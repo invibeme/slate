@@ -1,4 +1,4 @@
-# Police Registration Service
+# Legal compliance For Guest registration
 
 
 ## Register a Guest

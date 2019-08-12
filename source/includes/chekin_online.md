@@ -50,7 +50,7 @@ curl -X POST \
 
 ```
 
-This endpoint allows you to create a Check-in Online. Once you create a Check-in Online, a link is sent to the guest by SMS or email.
+This endpoint allows you to create a Check-in Online. Once you create a Check-in Online, a link is sent to the guest by email.
 
 The guest will be able to open the link and complete his data through a Web App to be sent to the police.
 
@@ -71,7 +71,6 @@ Support for RFID locks and Remote locks (web opening) coming soon.
 
 Parameter | Required | Description
 --------- | -------- | -----------
-guest_phone | true | Number of the guest to send the SMS, includes the prefix but without the +.
 guest_email | false | Email of the guest to send the email.
 include_ocr | true | Indicates whether the OCR Service is included or not.
 include_biometric_match | true | Indicates whether the Biometric Matching Service is included or not.

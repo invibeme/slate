@@ -1,4 +1,4 @@
-# Police Registration Service
+# Legal compliance For Guest registration
 
 
 ## Register a Guest
@@ -85,7 +85,7 @@ It also has no problem with changes related to the stay, for example if the numb
 It is not necessary to inform about that type of changes.
 
 If istat credentials are specified the app will send aggregated statistics once a day.
-Currently we support ISTAT for italian Radar, Campania, Emilia-Romagna, Abruzzo, Lombardia, Piemonte, Veneto, Toscana Turistat3, Sardegna and Trentino.
+Currently we support ISTAT for italian Radar, Campania, Emilia-Romagna, Abruzzo, Lombardia, Piemonte, Veneto, Toscana Turistat3, Sardegna, Trentino and Marche.
 
 ### HTTP Request
 
@@ -112,14 +112,14 @@ name | true | The guest's name/s.
 first_surname | true | The guest's first surname
 second_surname | false | The guest's seconds surname. Only required for spanish people.
 doc_issue_date | true | The issue date of the identification document in format YYYY-MM-DD, i.e. 2010-11-23
-doc_issue_country | false | Country code in ISO 3-letters format, i.e. ESP (Spain) / DEU (Germany) / ITA (Italy). It is required for Emila-Romagna/Abruzzo/Lombardia/Piemonte/Toscana Turistat3/Sardegna ISTATs.
+doc_issue_country | false | Country code in ISO 3-letters format, i.e. ESP (Spain) / DEU (Germany) / ITA (Italy). It is required for Emila-Romagna/Abruzzo/Lombardia/Piemonte/Toscana Turistat3/Sardegna/Marche ISTATs.
 doc_isue_place | false | Used for Italians in Italy Only. Also it is required if doc_issue_country is Italy. It must be the CODE of one of the Italian cities (see below).
 birth_date | true | The guest's birth date in format YYYY-MM-DD, i.e. 1982-10-15
 birth_place | false | Used for Italians in Italy Only. It must be the CODE of one of the Italian cities (see below).
 nationality | true | Country code in ISO 3-letters format, i.e. ESP (Spain) / DEU (Germany) / ITA (Italy)
-residence_country | false | Country code in ISO 3-letters format, i.e. ESP (Spain) / DEU (Germany) / ITA (Italy). It is required for Emila-Romagna/Abruzzo/Lombardia/Piemonte/Toscana Turistat3/Sardegna ISTATs.
+residence_country | false | Country code in ISO 3-letters format, i.e. ESP (Spain) / DEU (Germany) / ITA (Italy). It is required for Emila-Romagna/Abruzzo/Lombardia/Piemonte/Toscana Turistat3/Sardegna/Marche ISTATs.
 residence_city | false | Used if residence_country is Italy. It must be the CODE of one of the Italian cities (see below).
-rooms_occupied | false | Number of rooms occupied. Used for Emila-Romagna/Abruzzo/Lombardia/Piemonte/Sardegna/Trentino ISTATs only.
+rooms_occupied | false | Number of rooms occupied. Used for Emila-Romagna/Abruzzo/Lombardia/Piemonte/Sardegna/Trentino/Marche ISTATs only.
 generate_receipt | false | true by default. If set to false, the registration receipt won't be generated.
 accommodation_nif | false | NIF number of the legal holder of the accommodation, to be used in the receipt if generate_receipt is true.
 accommodation_name | false | The property name, to be used in the receipt if generate_receipt is true.
@@ -127,7 +127,7 @@ accommodation_province | false | The name of teh province where the accommodatio
 accommodation_city | false | The name of the city where the accommodation is placed, to be used in the receipt if generate_receipt is true.
 receipt_signature | false | The guest signature, base64 encoded, to be used in the receipt if generate_receipt is true.
 guest_type | false | Type of guest, can be a `SINGLE` (default value) or a group of people. Check the section **Register a group of guests** for details.
-istat_type | false | Istat account type, could be `ITRA` (Italy Radar), `ITCA` (Italy Campania), `ITER` (Emilia-Romagna), `ITAB` (Abruzzo), `ITLO` (Lombardia), `ITPI` (Piemonte), `ITVE` (Veneto), `ITT3` (Toscana Turistat3), `ITSA` (Sardegna) and `ITTR` (Trentino) for now
+istat_type | false | Istat account type, could be `ITRA` (Italy Radar), `ITCA` (Italy Campania), `ITER` (Emilia-Romagna), `ITAB` (Abruzzo), `ITLO` (Lombardia), `ITPI` (Piemonte), `ITVE` (Veneto), `ITT3` (Toscana Turistat3), `ITSA` (Sardegna), `ITTR` (Trentino) and `ITMA` (Marche) for now
 istat_username | false | Username for istat account
 istat_password | false | Password for istat account
 istat_structure_code | false | Code of structure (property) for istat account. It needed if you have more than one structure in your Emila-Romagna/Abruzzo/Lombardia/Piemonte/Veneto/Trentino istat account.
@@ -424,7 +424,7 @@ sex | true | "F" (Female) / "M" (Male)
 birth_date | true | The guest's birth date in format `YYYY-MM-DD`, i.e. 1982-10-15
 birth_place | false | Used for Italians in Italy Only. It must be the CODE of one of the Italian cities (see previous section).
 nights_of_stay | true | The number of nights of the stay as an integer, i.e. 3
-residence_country | false | Country code in ISO 3-letters format, i.e. ESP (Spain) / DEU (Germany) / ITA (Italy). It is required for Emila-Romagna/Abruzzo/Lombardia/Piemonte/Toscana Turistat3/Sardegna ISTATs.  
+residence_country | false | Country code in ISO 3-letters format, i.e. ESP (Spain) / DEU (Germany) / ITA (Italy). It is required for Emila-Romagna/Abruzzo/Lombardia/Piemonte/Toscana Turistat3/Sardegna/Marche ISTATs.  
 residence_city | false | Used if residence_country is Italy. It must be the CODE of one of the Italian cities (see previous section).
 
 

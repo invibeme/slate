@@ -13,7 +13,6 @@ includes:
   - police_registration
   - tax_calculation
   - ocr_web
-  - mobileocr
   - biomatch
   - chekin_online
   - errors

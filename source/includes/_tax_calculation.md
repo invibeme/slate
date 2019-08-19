@@ -153,6 +153,7 @@ https://api.chekin.io/api/v1/tax/calculation/ \
 ### Property Types
 
 Types are available at `/api/v1/tax/property-types/`
+You can filter property types by country, you just need to add `country` param with ISO 2-alpha country code to your request. For example `/api/v1/tax/property-types/?country=IT`
 
 ```shell
 curl -X GET \
@@ -183,6 +184,7 @@ https://api.chekin.io/api/v1/tax/property-types/ \
 ### Property Subtypes
 
 Subtypes are available at `/api/v1/tax/property-subtypes/`
+You can filter property subtypes by country, you just need to add `country` param with ISO 2-alpha country code to your request. For example `/api/v1/tax/property-types/?country=IT`
 
 ```shell
 curl -X GET \
@@ -211,6 +213,7 @@ https://api.chekin.io/api/v1/tax/property-subtypes/ \
 ### Geo Locations
 
 Locations are available at `/api/v1/geo/locations/`
+You can filter locations by country, you just need to add `country` param with ISO 2-alpha country code to your request. For example `/api/v1/tax/property-types/?country=IT`
 
 ```shell
 curl -X GET \

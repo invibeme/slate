@@ -2,6 +2,7 @@
 
 To get taxes you have to specify a bunch of fields common for every location and some fields that are required for a 
 specific region or province. Check the sections below to get details.
+**Important: the calculator supports age exemptions only. So you don't need pass people with other exemptions kinds to the calculator.**
 
 The common fields are:
 

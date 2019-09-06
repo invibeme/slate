@@ -2,11 +2,11 @@
 
 To get taxes you have to specify a bunch of fields common for every location and some fields that are required for a 
 specific region or province. Check the sections below to get details.
+**Important: the calculator supports age exemptions only. So you don't need pass people with other exemptions kinds to the calculator.**
 
 The common fields are:
 
 - `country_id` - should contain a 2-char country code according to ISO 3166-2
-- `property_type_id` - entity ID from `/api/v1/tax/property-types/`
 - `date` - guest check in date, ISO 8601-formatted date, `YYYY-MM-DD`, like `2019-01-20`, if skipped will be set to today;
 - `nights_number` - number of night the guest stay.
 
@@ -58,8 +58,53 @@ The fields you have to specify to get tax calculation for Italy are:
 
 - `birth_dates` - list of date items that are dates of birth of guests. Depending on this there can be various tax discounts;
 - `ages` - you can fill in this field with actual guest ages instead of `birth_dates` field;
+- `property_type_id` - entity ID from `/api/v1/tax/property-types/`
 - `property_subtype_id` - entity ID from `/api/v1/tax/property-subtypes/`
 - `location_id` - entity ID from `/api/v1/geo/locations/`
+
+Additional field `ages` will be added to response if `birth_dates` are specified.
+
+## Get taxes for Portugal
+
+```shell
+curl -X POST \
+https://api.chekin.io/api/v1/tax/calculation/ \
+-H 'Api-key: yourAPIKeyHere' \
+-H 'Content-Type: application/json' \
+-d '{
+  "country_id": "PT",
+  "date": "2019-01-01",
+  "location_id": "bea00375-a792-48f7-a937-2c73ebab201c",
+  "ages": [10, 12, 20],
+  "nights_number": 1
+}
+'
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+    "date": "2019-01-01",
+    "country_id": "PT",
+    "location_id": "bea00375-a792-48f7-a937-2c73ebab201c",
+    "nights_number": 1,
+    "tax": 1.5,
+    "currency": "EUR",
+    "ages": [
+        10,
+        20,
+        12
+    ]
+}
+```
+
+The fields you have to specify to get tax calculation for Portugal are:
+
+- `birth_dates` - list of date items that are dates of birth of guests. Depending on this there can be various tax discounts;
+- `ages` - you can fill in this field with actual guest ages instead of `birth_dates` field;
+- `location_id` - entity ID from `/api/v1/geo/locations/`
+- `is_camping` - optional boolean field. You can add it to request with `true` value to get calculate tax for camping. It is `false` by default.
 
 Additional field `ages` will be added to response if `birth_dates` are specified.
 
@@ -99,6 +144,7 @@ https://api.chekin.io/api/v1/tax/calculation/ \
 
 - `total_people_number`
 - `young_people_number`
+- `property_type_id` - entity ID from `/api/v1/tax/property-types/`
 - `region_id` - entity ID from `/api/v1/tax/regions/`;
 - `province_id` - entity ID from `/api/v1/tax/provinces/`;
 - `postal_code` - is required if province is not specified.
@@ -108,6 +154,7 @@ https://api.chekin.io/api/v1/tax/calculation/ \
 ### Property Types
 
 Types are available at `/api/v1/tax/property-types/`
+You can filter property types by country, you just need to add `country` param with ISO 2-alpha country code to your request. For example `/api/v1/tax/property-types/?country=IT`
 
 ```shell
 curl -X GET \
@@ -138,6 +185,7 @@ https://api.chekin.io/api/v1/tax/property-types/ \
 ### Property Subtypes
 
 Subtypes are available at `/api/v1/tax/property-subtypes/`
+You can filter property subtypes by country, you just need to add `country` param with ISO 2-alpha country code to your request. For example `/api/v1/tax/property-types/?country=IT`
 
 ```shell
 curl -X GET \
@@ -166,6 +214,7 @@ https://api.chekin.io/api/v1/tax/property-subtypes/ \
 ### Geo Locations
 
 Locations are available at `/api/v1/geo/locations/`
+You can filter locations by country, you just need to add `country` param with ISO 2-alpha country code to your request. For example `/api/v1/tax/property-types/?country=IT`
 
 ```shell
 curl -X GET \

@@ -130,7 +130,7 @@ picture_file | true | Image of the selfie to extract the face.
 
 ```shell
 curl -X GET \
-  https://api.chekin.io/api/v1/tools/biomatch/identification/64672caf4d2140e19d68b222fa0da318/ \
+  https://api.chekin.io/api/v1/tools/biomatch/person/64672caf4d2140e19d68b222fa0da318/ \
   -H 'Authorization: Token yourUserTokenHere' \
   -H 'Content-Type: application/json'
 ```

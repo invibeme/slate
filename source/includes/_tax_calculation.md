@@ -12,6 +12,60 @@ The common fields are:
 
 In response you'll get two additional fields: `tax` and `currency` which will contain amount of tax and currency code (like `EUR`)
 
+## Get taxes for Austria
+
+```shell
+curl -X POST \
+https://api.chekin.io/api/v1/tax/calculation/ \
+-H 'Api-key: yourAPIKeyHere' \
+-H 'Content-Type: application/json' \
+-d '{
+  "country_id": "AT",
+  "property_type_id": "a4aafe73-2a51-44c9-ad64-a8ad78d9bbe5",  
+  "date": "2019-01-01",
+  "location_id": "fce69e07-1712-4346-a874-cd5ac4fe79f2",
+  "birth_dates": ["1999-04-23", "2007-04-22"],
+  "nights_number": 1
+}
+'
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+    "country_id": "AT",
+    "property_type_id": "a4aafe73-2a51-44c9-ad64-a8ad78d9bbe5",
+    "date": "2019-01-01",   
+    "location_id": "fce69e07-1712-4346-a874-cd5ac4fe79f2",
+    "nights_number": 1,
+    "tax": 1.5,
+    "currency": "EUR",
+    "ages": [
+        20,
+        12
+    ],
+    "birth_dates": [
+        "1999-04-23",
+        "2007-04-22"
+    ]
+}
+```
+
+The fields you have to specify to get tax calculation for Austria are:
+
+- `birth_dates` - list of date items that are dates of birth of guests. Depending on this there can be various tax discounts;
+- `ages` - you can fill in this field with actual guest ages instead of `birth_dates` field;
+- `property_type_id` - entity ID from `/api/v1/tax/property-types/`
+- `nights_number` - number of nights
+- `location_id` - entity ID from `/api/v1/geo/locations/`
+
+Required only for Wien:
+
+- `cost_per_night` - cost of your accomodation per night. Required only for Wien tax calculation.
+
+Additional field `ages` will be added to response if `birth_dates` are specified.
+
 ## Get taxes for Italy
 
 ```shell

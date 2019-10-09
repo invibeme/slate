@@ -31,7 +31,6 @@ https://api.chekin.io/api/v1/tax/calculation/ \
 ```
 
 > The above command returns JSON structured like this:
-
 ```json
 {
     "country_id": "AT",
@@ -65,6 +64,56 @@ Required only for Wien:
 - `cost_per_night` - cost of your accomodation per night. Required only for Wien tax calculation.
 
 Additional field `ages` will be added to response if `birth_dates` are specified.
+
+
+
+
+## Get taxes for France
+
+```shell
+curl -X POST \
+https://api.chekin.io/api/v1/tax/calculation/ \
+-H 'Api-key: yourAPIKeyHere' \
+-H 'Content-Type: application/json' \
+-d '{
+	"country_id" : "FR",
+	"nights_number" : 3,
+	"property_type_id" : "71af30c7-ad68-41e7-887b-d4ab68058f37", 
+	"location_id": "2a92aa00-1b62-4658-a118-c845223c44b8",
+	"ages":  [18,11],
+	"cost_per_night": 160,
+	"date" : "2019-1-1"
+}	
+'
+```
+
+> The above command returns JSON structured like this:
+```json
+{
+    "property_type_id": "71af30c7-ad68-41e7-887b-d4ab68058f37",
+    "date": "2019-01-01",
+    "country_id": "FR",
+    "location_id": "2a92aa00-1b62-4658-a118-c845223c44b8",
+    "nights_number": 3,
+    "tax": 5.62,
+    "currency": "EUR",
+    "ages": [
+        18,
+        11
+    ],
+    "cost_per_night": "160.00"
+}
+```
+
+The fields you have to specify to get tax calculation for France are:
+
+- `birth_dates` - list of date items that are dates of birth of guests. Depending on this there can be various tax discounts;
+- `ages` - you can fill in this field with actual guest ages instead of `birth_dates` field;
+- `property_type_id` - entity ID from `/api/v1/tax/property-types/`
+- `location_id` - entity ID from `/api/v1/geo/locations/`
+- `cost_per_night`- cost for overnight reservation
+- `nights_number` - how many nights you have reservation for
+
 
 ## Get taxes for Italy
 
